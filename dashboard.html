@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cloud Monitoring Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Auto Refresh Every 15 Seconds -->
+    <meta http-equiv="refresh" content="15">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white shadow-sm mb-4">
+
+        <div class="container-fluid">
+
+            <span class="navbar-brand">
+                ☁ Cloud Monitoring Dashboard
+            </span>
+
+        </div>
+
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h3>☁ Cloud Monitor</h3>
+
+        <a href="/dashboard">Dashboard</a>
+        <a href="/history">History</a>
+        <a href="/alerts">Alerts</a>
+        <a href="/reports">Reports</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <h2>Cloud Monitoring Dashboard</h2>
+
+        <p>Real-Time Resource Monitoring</p>
+
+        <!-- System Status -->
+        <div class="card p-3 mt-3 mb-4">
+
+            <h4>System Status</h4>
+
+            <h2>Monitoring Active</h2>
+
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="row">
+
+            <div class="col-md-3 mb-3">
+
+                <div class="card metric-card cpu p-3">
+
+                    <h5>CPU Usage</h5>
+
+                    <div class="metric-value">
+                        {{ cpu }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="card metric-card memory p-3">
+
+                    <h5>Memory Usage</h5>
+
+                    <div class="metric-value">
+                        {{ memory }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="card metric-card disk p-3">
+
+                    <h5>Disk Usage</h5>
+
+                    <div class="metric-value">
+                        {{ disk }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="card metric-card network p-3">
+
+                    <h5>Network Traffic</h5>
+
+                    <div class="metric-value">
+                        {{ network }} Mbps
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container mt-4">
+
+            <h4 class="mb-3">Resource Usage Overview</h4>
+
+            <canvas id="resourceChart"></canvas>
+
+        </div>
+
+        <!-- Alert Section -->
+        <div class="alert-box mt-4">
+
+            <h4>System Alerts</h4>
+
+            {% if alerts %}
+
+            <ul class="list-group">
+
+                {% for alert in alerts %}
+
+                <li class="list-group-item list-group-item-warning">
+
+                    {{ alert }}
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+            {% else %}
+
+            <div class="alert alert-success mt-3">
+
+                No active alerts.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Chart Script -->
+    <script>
+
+        const cpu = Number("{{ cpu }}");
+        const memory = Number("{{ memory }}");
+        const disk = Number("{{ disk }}");
+
+        const ctx = document.getElementById('resourceChart');
+
+        new Chart(ctx, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: ['CPU', 'Memory', 'Disk'],
+
+                datasets: [{
+
+                    label: 'Usage (%)',
+
+                    data: [cpu, memory, disk]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        max: 100
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
