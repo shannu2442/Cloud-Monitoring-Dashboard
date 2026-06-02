@@ -1,0 +1,117 @@
+body{
+    background:#f4f6f9;
+    font-family:Arial, sans-serif;
+}
+
+/* Sidebar */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#1e293b;
+    color:white;
+    padding-top:20px;
+}
+
+.sidebar h3{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+}
+
+.sidebar a:hover{
+    background:#334155;
+}
+
+/* Main Content */
+
+.main-content{
+    margin-left:250px;
+    padding:20px;
+}
+
+/* Cards */
+
+.metric-card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.metric-card:hover{
+    transform:translateY(-5px);
+}
+
+.metric-value{
+    font-size:32px;
+    font-weight:bold;
+}
+
+/* CPU */
+
+.cpu{
+    background:#0d6efd;
+    color:white;
+}
+
+/* Memory */
+
+.memory{
+    background:#198754;
+    color:white;
+}
+
+/* Disk */
+
+.disk{
+    background:#ffc107;
+    color:black;
+}
+
+/* Network */
+
+.network{
+    background:#dc3545;
+    color:white;
+}
+
+/* Alert Box */
+
+.alert-box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+/* Chart */
+
+.chart-container{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+.navbar{
+    border-radius:10px;
+}
+
+table{
+    background:white;
+}
+
+.card{
+    border:none;
+    box-shadow:0px 2px 10px rgba(0,0,0,0.1);
+}
